@@ -53,8 +53,7 @@ workflow ZEROCALLER {
         VARIANT_CALLING(
             params.input,
             params.fasta,
-            params.intervals,
-            params.fastq_max_size
+            params.intervals
         )
 
         ch_versions.mix(VARIANT_CALLING.out.versions).set{ch_versions}

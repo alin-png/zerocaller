@@ -11,6 +11,8 @@ process HAPLOTYPECALLER {
     input:
     tuple val(sample_id), path(bam), path(bam_bai)
     path reference_genome
+    path reference_genome_fai
+    path reference_genome_dict
     each path (interval) 
     
     output:
@@ -18,7 +20,6 @@ process HAPLOTYPECALLER {
     
     script:
     gvcf_basename = "${sample_id}.${interval.getName()}.g.vcf.gz"
-    refernce_genome_main = reference_genome.find { it.getName().endsWith(".fa") }
     
     java_options = ""
     if (task.ext.java_options){
@@ -28,7 +29,7 @@ process HAPLOTYPECALLER {
     """
     gatk ${java_options} \
         HaplotypeCaller \
-        -R ${refernce_genome_main} \
+        -R ${reference_genome} \
         -I ${bam} \
         -L ${interval} \
         -O ${gvcf_basename} \
