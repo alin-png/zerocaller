@@ -89,9 +89,7 @@ workflow ZEROCALLER {
             params.vep_cache_version,
             params.vep_cache,
             params.vep_plugins,
-            params.vcfanno_toml,
             params.vcfanno_resources,
-            params.vcfanno_lua_func,
             params.vcf2tsv_preferred_transcript,
             params.vcf2tsv_config
         )

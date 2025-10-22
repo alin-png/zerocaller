@@ -41,9 +41,7 @@ workflow ANNOTATE {
         vep_cache_version
         vep_cache
         vep_plugins
-        vcfanno_toml
         vcfanno_resources
-        vcfanno_lua_func
         vcf2tsv_preferred_transcript
         vcf2tsv_config
     main:
@@ -68,9 +66,7 @@ workflow ANNOTATE {
 
         Channel.fromPath(vep_cache, checkIfExists:true).set{ch_vep_cache}
         Channel.fromPath(vep_plugins, checkIfExists:true).set{ch_vep_plugins}
-        Channel.fromPath(vcfanno_toml, checkIfExists:true).first().set{ch_vcfanno_toml}
         Channel.fromPath("${vcfanno_resources}/*", checkIfExists:true).toSortedList().set{ch_vcfanno_resources}
-        Channel.fromPath(vcfanno_lua_func, checkIfExists:true).first().set{ch_vcfanno_lua_func}
         Channel.fromPath(vcf2tsv_preferred_transcript, checkIfExists:true).first().set{ch_vcf2tsv_preferred_transcript}
         Channel.fromPath(vcf2tsv_config, checkIfExists:true).first().set{ch_vcf2tsv_config}
 
@@ -99,8 +95,8 @@ workflow ANNOTATE {
 
         VCFANNO(
             VEP.out.vcf,
-            ch_vcfanno_toml,
-            ch_vcfanno_lua_func,
+            params.vcfanno_toml,
+            params.vcfanno_lua_func,
             ch_vcfanno_resources
         )
 

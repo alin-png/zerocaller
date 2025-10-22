@@ -15,12 +15,12 @@ process VCFANNO {
     
     input:
     tuple val(sample_id), path(vcf)
-    path toml
-    path lua
+    val toml
+    val lua
     path resources
 
     output:
-    tuple val(sample_id), path("*.vcf.gz") , emit: vcf
+    tuple val(sample_id), path("*.vcf") , emit: vcf
     path "versions.yml"                , emit: versions
 
     when:
