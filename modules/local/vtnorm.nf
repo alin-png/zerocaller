@@ -15,7 +15,6 @@ process VTNORM{
 
     output:
     tuple val(sample_id), path("*.vcf.gz")       , emit: vcf
-    tuple val(sample_id), path("${fasta}.fai")   , emit: fai, optional: true
     path "versions.yml"                     , emit: versions
 
     //when: task.ext.when == null || task.ext.when

@@ -60,7 +60,7 @@ workflow ZEROCALLER {
 
         ch_in_annotate_vcf = VARIANT_CALLING.out.gvcf_parts
 
-    }else{
+     else{
         Channel
             .fromPath(params.input, checkIfExists:true )
             .splitCsv(header: true)

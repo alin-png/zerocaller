@@ -20,7 +20,7 @@ process VCFANNO {
     path resources
 
     output:
-    tuple val(sample_id), path("*.vcf") , emit: vcf
+    tuple val(sample_id), path("*.vcf.gz") , emit: vcf
     path "versions.yml"                , emit: versions
 
     when:
@@ -29,7 +29,7 @@ process VCFANNO {
     script:
     def args = task.ext.args ?: ''
     def args2 = task.ext.args2 ?: ''
-    def prefix = task.ext.prefix ?: "${sample_id}-vcfanno"
+    def prefix = task.ext.prefix ?: "${sample_id}.vcfanno"
     def lua_cmd = lua ? "--lua ${lua}" : ""
     """
     ${args2} vcfanno \\
